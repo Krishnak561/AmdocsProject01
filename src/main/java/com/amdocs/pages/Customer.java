@@ -4,8 +4,8 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.amdocs.DAO.Implementation.CustomerDAOimpl;
-import com.exceptions.InvalidFirstNameException;
-import com.exceptions.InvalidNumberException;
+import com.amdocs.exceptions.InvalidFirstNameException;
+import com.amdocs.exceptions.InvalidNumberException;
 
 public class Customer {
 

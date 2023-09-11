@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 
 import com.amdocs.DAO.CustomerDAO;
 import com.amdocs.entities.CustomerEntity;
+import com.amdocs.exceptions.InvalidFirstNameException;
+import com.amdocs.exceptions.InvalidNumberException;
 import com.amdocs.services.SQLconnection;
-import com.exceptions.InvalidFirstNameException;
-import com.exceptions.InvalidNumberException;
 
 public class CustomerDAOimpl implements CustomerDAO {
 

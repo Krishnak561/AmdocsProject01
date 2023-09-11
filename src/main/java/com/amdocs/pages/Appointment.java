@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.amdocs.DAO.Implementation.AppointmentDAOimpl;
+import com.amdocs.exceptions.InvalidFirstNameException;
 
 public class Appointment {
 
@@ -47,7 +48,11 @@ public class Appointment {
                         break;
                 }
             }
-        } catch (NumberFormatException e) {
+        } catch(InvalidFirstNameException e){
+			System.out.println(e.getMessage());
+			appointmentMenu();
+		}
+        catch (NumberFormatException e) {
             System.out.println("Input should be a number in the range of 0 - 5.");
             System.out.println("Entered: " + e.getMessage());
             appointmentMenu();

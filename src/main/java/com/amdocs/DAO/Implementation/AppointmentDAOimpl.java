@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import com.amdocs.DAO.AppointmentDAO;
 import com.amdocs.entities.AppointmentEntity;
+import com.amdocs.exceptions.InvalidFirstNameException;
 import com.amdocs.services.SQLconnection;
 
 public class AppointmentDAOimpl implements AppointmentDAO {
@@ -121,12 +122,16 @@ public class AppointmentDAOimpl implements AppointmentDAO {
         return false;
     }
 
-    public void getAppointmentDetails() throws SQLException {
+    public void getAppointmentDetails() throws SQLException, InvalidFirstNameException {
 
         AppointmentEntity obj = new AppointmentEntity();
-        try {
             System.out.println("Enter Advocate's First Name: ");
-            obj.setFirstName(sc.nextLine());
+            String fn = sc.nextLine();
+        if (fn.length() != 0) {
+            obj.setFirstName(fn);
+        } else {
+            throw new InvalidFirstNameException("Error: First Name can not be empty.\nTry again");
+        }
 
             System.out.println("Enter Advocate's Last Name: ");
             obj.setLastName(sc.nextLine());
@@ -140,9 +145,7 @@ public class AppointmentDAOimpl implements AppointmentDAO {
             System.out.println("Enter Reason of Visit ");
             obj.setReasonOfVisit(sc.nextLine());
 
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        
         insertEntity(obj);
     }
 
