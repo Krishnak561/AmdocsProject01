@@ -1,0 +1,54 @@
+=> Package -> Container o f classes and Interfaces
+
+Data types
+1. Primitive type
+-byte  -Byte
+short   Short
+int     -Integer
+long
+float
+double
+char
+boolean
+2. Reference data type[Object]
+	String 
+	Math
+	Date
+	Employee
+		Student
+		
+1. How to define the variable?
+ dataType variableName,.....;
+  int x;
+  x=10;// Assignment
+  Employee e;		
+  
+  	Access Specifier
+  	1. private - With in the class
+  	2. public - Universe
+  	3. protected - Package as well as extended class
+  	4. default or no modifier - package access
+  	
+  	
+  Map	
+  	
+  	Key			Value
+ -----------------------------
+ r001			Akash
+ r002 			Aman 	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+	
