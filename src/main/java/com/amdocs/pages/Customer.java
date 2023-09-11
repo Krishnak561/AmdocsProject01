@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.amdocs.DAO.Implementation.CustomerDAOimpl;
+import com.amdocs.exceptions.InvalidDateFormatException;
 import com.amdocs.exceptions.InvalidFirstNameException;
 import com.amdocs.exceptions.InvalidNumberException;
 
@@ -54,7 +55,11 @@ public class Customer {
 					break;
 			}
 		}
-		} catch(InvalidNumberException e){
+		} catch (InvalidDateFormatException e) {
+            System.out.println(e.getMessage());
+            customerMenu();
+        }
+		catch(InvalidNumberException e){
 			System.out.println(e.getMessage());
 			customerMenu();
 		}

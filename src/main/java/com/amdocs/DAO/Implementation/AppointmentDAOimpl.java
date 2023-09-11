@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 import com.amdocs.DAO.AppointmentDAO;
 import com.amdocs.entities.AppointmentEntity;
-import com.amdocs.exceptions.InvalidFirstNameException;
+import com.amdocs.exceptions.*;
 import com.amdocs.services.SQLconnection;
 
 public class AppointmentDAOimpl implements AppointmentDAO {
@@ -122,30 +122,36 @@ public class AppointmentDAOimpl implements AppointmentDAO {
         return false;
     }
 
-    public void getAppointmentDetails() throws SQLException, InvalidFirstNameException {
+    public void getAppointmentDetails() throws SQLException, InvalidFirstNameException, InvalidDateFormatException {
 
         AppointmentEntity obj = new AppointmentEntity();
-            System.out.println("Enter Advocate's First Name: ");
-            String fn = sc.nextLine();
+        System.out.println("Enter Advocate's First Name: ");
+        String fn = sc.nextLine();
         if (fn.length() != 0) {
             obj.setFirstName(fn);
         } else {
             throw new InvalidFirstNameException("Error: First Name can not be empty.\nTry again");
         }
 
-            System.out.println("Enter Advocate's Last Name: ");
-            obj.setLastName(sc.nextLine());
+        System.out.println("Enter Advocate's Last Name: ");
+        obj.setLastName(sc.nextLine());
 
-            System.out.println("Enter Customer ID: ");
-            obj.setCustomer_ID(Integer.parseInt(sc.nextLine()));
+        System.out.println("Enter Customer ID: ");
+        obj.setCustomer_ID(Integer.parseInt(sc.nextLine()));
 
-            System.out.println("Enter the Date of Appointment: ");
-            obj.setDateOfVisit(sc.nextLine());
+        System.out.println("Enter the Date of Appointment(DD-MM-YYY): ");
+        String strDate = sc.nextLine();
+        String strDateRegEx = "\\d{2}-\\d{2}-\\d{4}";
 
-            System.out.println("Enter Reason of Visit ");
-            obj.setReasonOfVisit(sc.nextLine());
+        if (strDate.matches(strDateRegEx)) {
+            obj.setDateOfVisit(strDate);
+        } else {
+            throw new InvalidDateFormatException("Error: Invalid date format. Try Again!");
+        }
 
-        
+        System.out.println("Enter Reason of Visit ");
+        obj.setReasonOfVisit(sc.nextLine());
+
         insertEntity(obj);
     }
 

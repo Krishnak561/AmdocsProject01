@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import com.amdocs.DAO.CustomerDAO;
 import com.amdocs.entities.CustomerEntity;
+import com.amdocs.exceptions.InvalidDateFormatException;
 import com.amdocs.exceptions.InvalidFirstNameException;
 import com.amdocs.exceptions.InvalidNumberException;
 import com.amdocs.services.SQLconnection;
@@ -87,7 +88,7 @@ public class CustomerDAOimpl implements CustomerDAO {
             String dob = rs.getString("DOB");
             String city = rs.getString("City");
             int pincode = rs.getInt("Pincode");
-            int phonenum = rs.getInt("PhoneNumber");
+            String phonenum = rs.getString("PhoneNumber");
             String email = rs.getString("Email");
 
             customerData.add(fn);
@@ -112,7 +113,7 @@ public class CustomerDAOimpl implements CustomerDAO {
 
     }
 
-    public void getCustomerDetails() throws SQLException, InvalidNumberException, InvalidFirstNameException {
+    public void getCustomerDetails() throws SQLException, InvalidNumberException, InvalidFirstNameException, InvalidDateFormatException {
 
         CustomerEntity obj = new CustomerEntity();
 
@@ -127,8 +128,15 @@ public class CustomerDAOimpl implements CustomerDAO {
         System.out.println("Enter your last name: ");
         obj.setLastName(sc.nextLine());
 
-        System.out.println("Enter your DOB: ");
-        obj.setDob(sc.nextLine());
+        System.out.println("Enter your DOB(DD-MM-YYYY): ");
+        String strDate = sc.nextLine();
+        String strDateRegEx = "\\d{2}-\\d{2}-\\d{4}";
+
+        if (strDate.matches(strDateRegEx)) {
+            obj.setDob(strDate);
+        } else {
+            throw new InvalidDateFormatException("Error: Invalid date format. Try Again!");
+        }
 
         System.out.println("Enter your city of residence: ");
         obj.setCityOfResidence(sc.nextLine());
